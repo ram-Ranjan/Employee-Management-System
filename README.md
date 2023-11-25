@@ -1,6 +1,3 @@
-# Employee-Management-System
-Employee Management System, incorporating Spring Boot  for crud operations.
-
 # Employee Management System
 
 ## Overview
