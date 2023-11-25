@@ -31,13 +31,23 @@ mvn spring-boot:run
 
 API Endpoints
 POST /employee: Add a new employee
+
 GET /employee/findAllEmployees: Get a list of all employees
+
 GET /employee/name/{empName}: Get employee details by name
+
 GET /employee/findBySalaryRange: Get employees with salary between 70000 and 76000
+
 PUT /employee/role/{id}: Update the role of an employee
+
 PUT /employee/salary/{id}: Update the salary of an employee
+
 PUT /employee/teamName/{id}: Update the team name of an employee
+
 PUT /employee/{id}: Update all details of an employee
+
 DELETE /employee/{id}: Delete an employee by ID
+
 DELETE /employee/name/{empName}: Delete an employee by name
+
 DELETE /employee/deleteAll: Delete all employees
