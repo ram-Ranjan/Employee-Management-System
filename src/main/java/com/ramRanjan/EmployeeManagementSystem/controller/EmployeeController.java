@@ -26,14 +26,13 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService service;
 
-	//Rest Api to add Employee i.e Create Operation
+	// Rest Api to add Employee i.e Create Operation
 	@PostMapping
 	public ResponseEntity<ResponseStructure<Employee>> addEmployee(@RequestBody Employee employee) {
 		return service.addEmployee(employee);
 	}
 
-	
-	//Rest Api to fetch all employees i.e Retrieve Operation
+	// Rest Api to fetch all employees i.e Retrieve Operation
 	@GetMapping("/findAllEmployees")
 	public ResponseEntity<ResponseStructure<List<Employee>>> findAllEmployees() {
 		{
@@ -41,75 +40,72 @@ public class EmployeeController {
 		}
 	}
 
-	//Rest Api fetch Employee by name
-	  @GetMapping("/name/{empName}")
-	    public ResponseEntity<ResponseStructure<List<Employee>>> getEmployeeByName(@PathVariable String empName) {
-	        return service.findEmployeeByName(empName);
-	    }
+	// Rest Api fetch Employee by name
+	@GetMapping("/name/{empName}")
+	public ResponseEntity<ResponseStructure<List<Employee>>> getEmployeeByName(@PathVariable String empName) {
+		return service.findEmployeeByName(empName);
+	}
 
-	//Rest Api to fetch Employee between salary range 70000-76000
+	// Rest Api to fetch Employee between salary range 70000-76000
 	@GetMapping("/findBySalaryRange")
 	public ResponseEntity<ResponseStructure<List<Employee>>> findEmployeeBySalary() {
 
 		return service.findEmployeeBySalary();
 
 	}
-	
-	//Rest Api to Update Employee
-	
-	//Update Employee role
+
+	// Rest Api to Update Employee
+
+	// Update Employee role
 	@PutMapping("/role/{id}")
-	public ResponseEntity<ResponseStructure<Employee>> updateRole(@PathVariable long id,@RequestParam Role role) {
+	public ResponseEntity<ResponseStructure<Employee>> updateRole(@PathVariable long id, @RequestParam Role role) {
 
 		return service.updateRole(id, role);
 	}
-	
-	//Update Employee salary
+
+	// Update Employee salary
 	@PutMapping("/salary/{id}")
-	public ResponseEntity<ResponseStructure<Employee>> updateSalary(@PathVariable long id,@RequestParam long salary) {
+	public ResponseEntity<ResponseStructure<Employee>> updateSalary(@PathVariable long id, @RequestParam long salary) {
 
 		return service.updateSalary(id, salary);
 	}
-	
-	//Update Employee teamName
+
+	// Update Employee teamName
 	@PutMapping("/teamName/{id}")
-	public ResponseEntity<ResponseStructure<Employee>> updateTeamName(@PathVariable long id,@RequestParam String teamName) {
+	public ResponseEntity<ResponseStructure<Employee>> updateTeamName(@PathVariable long id,
+			@RequestParam String teamName) {
 
 		return service.updateTeamName(id, teamName);
 	}
-	//Update Employee
+
+	// Update Employee
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseStructure<Employee>> updateEmployee(@PathVariable long id, @RequestBody Employee updatedEmployee) {
+	public ResponseEntity<ResponseStructure<Employee>> updateEmployee(@PathVariable long id,
+			@RequestBody Employee updatedEmployee) {
 
 		return service.updateEmployee(id, updatedEmployee);
-		
+
 	}
-	//Delete Employee
-	
-	//Delete by Id
+	// Delete Employee
+
+	// Delete by Id
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ResponseStructure<Employee>> deleteEmployeeById(@PathVariable long id) {
 		return service.deleteEmployeeById(id);
 	}
-	
-	//Delete by Name
+
+	// Delete by Name
 	@DeleteMapping("/name/{empName}")
 	public ResponseEntity<ResponseStructure<Employee>> deleteEmployeeByEmpName(@PathVariable String empName) {
 
 		return service.deleteEmployeeByEmpName(empName);
-		
+
 	}
-	
-	//Delete All information
+
+	// Delete All information
 	@DeleteMapping("/deleteAll")
 	public ResponseEntity<ResponseStructure<List<Employee>>> deleteAll() {
 		return service.deleteAll();
 	}
-	
-	
-	
-	
-	
-	
 
 }

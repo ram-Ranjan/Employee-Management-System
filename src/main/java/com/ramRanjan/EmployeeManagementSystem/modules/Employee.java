@@ -14,7 +14,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "employees")
 public class Employee {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "empId")
@@ -29,7 +29,5 @@ public class Employee {
 	private String teamName;
 	@Column(name = "empSalary")
 	private long salary;
-	
-	
 
 }

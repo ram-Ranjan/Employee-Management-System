@@ -8,22 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.ramRanjan.EmployeeManagementSystem.modules.Employee;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Long>
-{
-
-	
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	public List<Employee> findByEmpName(String empName);
 
-    @Query("SELECT e FROM Employee e WHERE e.salary >= 70000 AND e.salary <= 76000")
+	@Query("SELECT e FROM Employee e WHERE e.salary >= 70000 AND e.salary <= 76000")
 	public List<Employee> findByEmpSalary();
 
-    
-    @Query("SELECT DISTINCT e.teamName from Employee e")
+	@Query("SELECT DISTINCT e.teamName from Employee e")
 	public List<String> findAllUniqueTeams();
-	
-	
-	
-	
 
 }
