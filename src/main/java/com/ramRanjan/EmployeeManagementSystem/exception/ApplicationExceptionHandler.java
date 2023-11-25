@@ -9,26 +9,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.ramRanjan.EmployeeManagementSystem.util.ResponseStructure;
 
 @RestControllerAdvice
-public class ApplicationExceptionHandler {
+public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	
-	
-	public class ApplicationHandler extends ResponseEntityExceptionHandler {
-
-//		@Override
-//		protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-//				HttpHeaders headers, HttpStatus status, WebRequest request) {
-//
-//			List<ObjectError> list = ex.getAllErrors();
-//			HashMap<String, String> hashMap = new HashMap<>();
-//			for (ObjectError error : list) {
-//				String fieldName = ((FieldError) error).getField();
-//				String message = error.getDefaultMessage();
-//				hashMap.put(fieldName, message);
-//			}
-//			return new ResponseEntity<Object>(hashMap, HttpStatus.BAD_REQUEST);
-//		}
-
 		@ExceptionHandler(EmployeeNotFoundByIdException.class)
 		public ResponseEntity<ResponseStructure<String>> emailAlreadyExistingForApplicant(
 				EmployeeNotFoundByIdException ex) {
@@ -51,4 +34,4 @@ public class ApplicationExceptionHandler {
 		}
 
 }
-}
+

@@ -21,7 +21,7 @@ public class EmployeeService {
 	@Autowired
 	EmployeeRepository empRepository;
 
-	// Save Employee Rest Apis
+	// Save Employee Method
 	public ResponseEntity<ResponseStructure<Employee>> addEmployee(Employee employee) {
 		empRepository.save(employee);
 
@@ -34,7 +34,7 @@ public class EmployeeService {
 
 	}
 
-	// Find Employee Rest Apis
+	// Fetch Methods
 	public ResponseEntity<ResponseStructure<Employee>> findEmployeeById(long id) {
 		Optional<Employee> existingEmployee = empRepository.findById(id);
 		
@@ -57,7 +57,7 @@ public class EmployeeService {
 			ResponseStructure<List<Employee>> structure = new ResponseStructure<>();
 
 			structure.setStatus(HttpStatus.FOUND.value());
-			structure.setMessage("Employee found.");
+			structure.setMessage("Employees List found.");
 			structure.setData(employees);
 			return new ResponseEntity<ResponseStructure<List<Employee>>>(structure, HttpStatus.FOUND);
 		}else {
@@ -66,16 +66,16 @@ public class EmployeeService {
 	}
 	
 
-	public ResponseEntity<ResponseStructure<Employee>> findEmployeeByName(String empName) {
-		Optional<Employee> existingEmployee = empRepository.findByEmpName(empName);
+	public ResponseEntity<ResponseStructure<List<Employee>>> findEmployeeByName(String empName) {
+		List<Employee> existingEmployees = empRepository.findByEmpName(empName);
 		
-		if (existingEmployee.isPresent()) {
-			ResponseStructure<Employee> structure = new ResponseStructure<>();
+		if (existingEmployees!=null) {
+			ResponseStructure<List<Employee>> structure = new ResponseStructure<>();
 
 			structure.setStatus(HttpStatus.FOUND.value());
 			structure.setMessage("Employee found.");
-			structure.setData(existingEmployee);
-			return new ResponseEntity<ResponseStructure<Employee>>(structure, HttpStatus.FOUND);
+			structure.setData(existingEmployees);
+			return new ResponseEntity<ResponseStructure<List<Employee>>>(structure, HttpStatus.FOUND);
 		}else {
 			throw new EmployeeNotFoundByIdException("Failed to find Employee!");
 		}
@@ -83,8 +83,8 @@ public class EmployeeService {
 		
 	}
 
-	public ResponseEntity<ResponseStructure<List<Employee>>> findEmployeeBySalary(long salary) {
-		List<Employee> empList = empRepository.findByEmpSalary(salary);
+	public ResponseEntity<ResponseStructure<List<Employee>>> findEmployeeBySalary() {
+		List<Employee> empList = empRepository.findByEmpSalary();
 
 		if(empList!=null) {
 			ResponseStructure<List<Employee>> structure = new ResponseStructure<>();
@@ -114,7 +114,7 @@ public class EmployeeService {
 		}
 	}
 
-	// Update Rest Apis
+	// Update Methods
 
 	public ResponseEntity<ResponseStructure<Employee>> updateRole(long id, Role role) {
 
@@ -190,13 +190,12 @@ public class EmployeeService {
 
 			Employee employee = existingEmployee.get();
 			
-			employee.setId(id);
-
+			
 			if (updatedEmployee.getEmpName() != null)
 				employee.setEmpName(updatedEmployee.getEmpName());
 
 			if (updatedEmployee.getCompanyName() != null)
-				employee.setEmpName(updatedEmployee.getCompanyName());
+				employee.setCompanyName(updatedEmployee.getCompanyName());
 
 			if (updatedEmployee.getRole() != null)
 				employee.setRole(updatedEmployee.getRole());
@@ -206,6 +205,7 @@ public class EmployeeService {
 
 			if (updatedEmployee.getTeamName() != null)
 				employee.setTeamName(updatedEmployee.getTeamName());
+			
 			
 			empRepository.save(employee);
 			
@@ -221,7 +221,7 @@ public class EmployeeService {
 
 	}
 
-	// Delete Rest Apis
+	// Delete  Methods
 	
 	public ResponseEntity<ResponseStructure<Employee>> deleteEmployeeById(long id) {
 
@@ -243,26 +243,42 @@ public class EmployeeService {
 	}
 	
 	public ResponseEntity<ResponseStructure<Employee>> deleteEmployeeByEmpName(String empName) {
-		Optional<Employee> existingEmployee = empRepository.findByEmpName(empName);
+		List<Employee> existingEmployee = empRepository.findByEmpName(empName);
 
-		if (existingEmployee.isPresent()) {
+		if (existingEmployee!=null) {
 
 			ResponseStructure<Employee> structure = new ResponseStructure<>();
 
-			empRepository.delete(existingEmployee.get());
+			Employee employeeToDelete = existingEmployee.get(0);
+			empRepository.delete(employeeToDelete);
 			
 			
 			structure.setStatus(HttpStatus.FOUND.value());
 			structure.setMessage("Employee Deleted.");
-			structure.setData(existingEmployee.get());
+			structure.setData(employeeToDelete);
 			return new ResponseEntity<ResponseStructure<Employee>>(structure, HttpStatus.FOUND);
 		}else {
 			throw new EmployeeNotFoundByIdException("Failed to find Employee!");
 		}
 	}
 
-	public void deleteAll() {
-		empRepository.deleteAll();
+	public ResponseEntity<ResponseStructure<List<Employee>>> deleteAll() {
+		
+		List<Employee> existingEmployees = empRepository.findAll();
+
+		if (existingEmployees!=null) {
+
+			ResponseStructure<List<Employee>> structure = new ResponseStructure<>();
+
+			empRepository.deleteAll();
+
+			structure.setStatus(HttpStatus.FOUND.value());
+			structure.setMessage("Employee Deleted.");
+			structure.setData(existingEmployees);
+			return new ResponseEntity<ResponseStructure<List<Employee>>>(structure, HttpStatus.FOUND);
+		}else {
+			throw new EmployeeNotFoundByIdException("Failed to find Employee!");
+		}
 	}
 
 }

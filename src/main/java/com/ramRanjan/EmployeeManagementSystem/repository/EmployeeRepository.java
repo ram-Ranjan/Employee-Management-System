@@ -13,10 +13,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>
 
 	
 
-	public Optional<Employee> findByEmpName(String empName);
+	public List<Employee> findByEmpName(String empName);
 
     @Query("SELECT e FROM Employee e WHERE e.salary >= 70000 AND e.salary <= 76000")
-	public List<Employee> findByEmpSalary(long salary);
+	public List<Employee> findByEmpSalary();
 
     
     @Query("SELECT DISTINCT e.teamName from Employee e")
