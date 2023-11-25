@@ -29,12 +29,6 @@ public class EmployeeController {
 	public ResponseEntity<ResponseStructure<Employee>> addEmployee(@RequestBody Employee employee){
 		return service.addEmployee(employee);
 	}
-
-	
-	
-	
-	
-	
 	}
 	
 	

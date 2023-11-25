@@ -28,7 +28,7 @@ public class EmployeeService {
 		ResponseStructure<Employee> structure = new ResponseStructure<Employee>();
 
 		structure.setStatus(HttpStatus.CREATED.value());
-		structure.setMessage("Customer added successfully.");
+		structure.setMessage("Employee added successfully.");
 		structure.setData(employee);
 		return new ResponseEntity<ResponseStructure<Employee>>(structure, HttpStatus.CREATED);
 
