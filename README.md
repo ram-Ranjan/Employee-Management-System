@@ -21,16 +21,17 @@ A simple Employee Management System designed for CRUD operations using Spring Bo
    git clone [https://github.com/ram-Ranjan/Employee-Management-System](https://github.com/ram-Ranjan/Employee-Management-System.git)
    
 Navigate to the project directory:
-bash
+   ```bash
 cd EmployeeManagementSystem
 
 Build the project:
-bash
+   ```bash
 mvn clean install
 
 Run the application:
-bash
+   ```bash
 mvn spring-boot:run
+
 
 
 API Endpoints
